@@ -100,39 +100,12 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         return size;
     }
 
-    public void printTree() {
-        if (root == null) {
-            return;
-        }
-
-        Queue<Node<K, V>> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            Node<K, V> node = queue.poll();
-            System.out.println(node.key + " : " + node.value);
-
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-        }
-    }
-
-
     // Code for testing to make sure it works
     public static void main(String[] args) {
-        CustomTreeMap<String, Integer> map = new CustomTreeMap<>();
-        map.put("one", 1);
-        map.put("two", 2);
-        map.put("three", 3);
-        map.printTree();
-        System.out.println(map.getSize());
-        map.remove("two");
-        map.printTree();
-        System.out.println(map.getSize());
+        CustomTreeMap<Integer, String> map = new CustomTreeMap<>();
+        map.put(6, "six");
+        map.put(3, "three");
+        map.put(0, "zero");
+        map.put(5, "five");
     }
 }
