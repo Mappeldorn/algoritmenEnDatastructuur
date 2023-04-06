@@ -1,7 +1,14 @@
+/**
+ * A custom hash set implementation
+ * @param <T> The type of the elements in the set
+ */
 public class CustomHashSet<T> {
     private Object[] table;
     private int size;
 
+    /**
+     * Create a new set
+     */
     public CustomHashSet() {
         table = new Object[16];
         size = 0;
