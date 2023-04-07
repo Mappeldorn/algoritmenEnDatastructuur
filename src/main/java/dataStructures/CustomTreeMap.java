@@ -1,13 +1,20 @@
 package dataStructures;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
+/**
+ * A custom tree map implementation
+ * @param <K>
+ * @param <V>
+ */
 public class CustomTreeMap<K extends Comparable<K>, V> {
 
     private Node<K, V> root;
     int size;
 
+    /**
+     * A node in the tree
+     * @param <K> key
+     * @param <V> value
+     */
     private static class Node<K extends Comparable<K>, V> {
         private K key;
         private V value;
@@ -19,10 +26,22 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         }
     }
 
+    /**
+     * Add a key-value pair to the tree
+     * @param key key
+     * @param value value
+     */
     public void put(K key, V value) {
         root = put(root, key, value);
     }
 
+    /**
+     * Add a key-value pair to the tree
+     * @param node current node
+     * @param key key
+     * @param value value
+     * @return the node
+     */
     private Node<K, V> put(Node<K, V> node, K key, V value) {
         if (node == null) {
             size++;
@@ -41,11 +60,22 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         return node;
     }
 
+    /**
+     * Get the value of a key
+     * @param key key
+     * @return value
+     */
     public V get(K key) {
         Node<K, V> node = get(root, key);
         return node == null ? null : node.value;
     }
 
+    /**
+     * Get the node of a key
+     * @param node current node
+     * @param key key
+     * @return node
+     */
     private Node<K, V> get(Node<K, V> node, K key) {
         if (node == null) {
             return null;
@@ -61,10 +91,20 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         }
     }
 
+    /**
+     * Remove a key-value pair from the tree
+     * @param key key
+     */
     public void remove(K key) {
         root = remove(root, key);
     }
 
+    /**
+     * Remove a key-value pair from the tree
+     * @param node current node
+     * @param key key
+     * @return the node
+     */
     private Node<K, V> remove(Node<K, V> node, K key) {
         if (node == null) {
             return null;
@@ -72,16 +112,20 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
 
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
+            // If the key is smaller than the current node, go left
             node.left = remove(node.left, key);
         } else if (cmp > 0) {
+            // If the key is greater than the current node, go right
             node.right = remove(node.right, key);
         } else {
+            // If the key is equal to the current node, remove it
             size--;
             if (node.left == null) {
                 return node.right;
             } else if (node.right == null) {
                 return node.left;
             } else {
+                // If the node has two children, replace it with the minimum node in the right subtree
                 Node<K, V> minNode = min(node.right);
                 node.key = minNode.key;
                 node.value = minNode.value;
@@ -91,6 +135,11 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         return node;
     }
 
+    /**
+     * Get the minimum node
+     * @param node current node
+     * @return the minimum node
+     */
     private Node<K, V> min(Node<K, V> node) {
         if (node.left == null) {
             return node;
@@ -98,43 +147,20 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         return min(node.left);
     }
 
+    /**
+     * Get the size of the tree
+     * @return size
+     */
     public int getSize() {
         return size;
     }
 
-    public void printTree() {
-        if (root == null) {
-            return;
-        }
-
-        Queue<Node<K, V>> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            Node<K, V> node = queue.poll();
-            System.out.println(node.key + " : " + node.value);
-
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-        }
-    }
-
-
     // Code for testing to make sure it works
     public static void main(String[] args) {
-        CustomTreeMap<String, Integer> map = new CustomTreeMap<>();
-        map.put("one", 1);
-        map.put("two", 2);
-        map.put("three", 3);
-        map.printTree();
-        System.out.println(map.getSize());
-        map.remove("two");
-        map.printTree();
-        System.out.println(map.getSize());
+        CustomTreeMap<Integer, String> map = new CustomTreeMap<>();
+        map.put(6, "six");
+        map.put(3, "three");
+        map.put(0, "zero");
+        map.put(5, "five");
     }
 }
