@@ -1,3 +1,5 @@
+package dataStructures;
+
 /**
  * A custom tree map implementation
  * @param <K>

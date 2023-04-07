@@ -1,3 +1,5 @@
+package dataStructures;
+
 /**
  * A custom hash set implementation
  * @param <T> The type of the elements in the set
