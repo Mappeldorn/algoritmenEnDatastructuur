@@ -1,3 +1,5 @@
+package sorting;
+
 public class BubbleSort<T extends Comparable<T>> {
     public void bubbleSort(T[] arr) {
         int length = arr.length;
