@@ -5,6 +5,10 @@ import java.util.Queue;
 
 public class CustomBinaryTree <E> {
 
+    /**
+     * A node from the binary tree
+     * @param <E>
+     */
     public static class Node <E>{
         E value;
         Node left;
