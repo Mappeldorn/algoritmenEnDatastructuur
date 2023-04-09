@@ -1,6 +1,8 @@
 package dataStructures;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class CustomBinaryTree <T extends Comparable<T>> {
@@ -120,15 +122,82 @@ public class CustomBinaryTree <T extends Comparable<T>> {
         return null;
     }
 
+    /**
+     * Sort binary tree
+     */
+    public void selectionSort() {
+        List<T> list = new ArrayList<T>();
+        traverse(root, list);
+
+        for (int i = 0; i < list.size() - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(j).compareTo(list.get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            T temp = list.get(i);
+            list.set(i, list.get(minIndex));
+            list.set(minIndex, temp);
+        }
+
+            rebuild(root, list);
+    }
+
+    /**
+     * Rebuild the binary tree with the sorted values
+     * @param node
+     * @param list
+     */
+    private void rebuild(Node node, List<T> list) {
+        if (node != null) {
+            rebuild(node.left, list);
+            node.value = list.remove(0);
+            rebuild(node.right, list);
+        }
+    }
+
+    /**
+     * Gets all elements of the binary tree and sets it in a List
+     * @param node
+     * @param list
+     */
+    private void traverse(Node<T> node, List<T> list) {
+        if (node != null) {
+            traverse(node.left, list);
+            list.add(node.value);
+            traverse(node.right, list);
+        }
+    }
+
+    // Helper method to print a node and its subtree
+    private void printNode(Node<T> node, String prefix, boolean isLeft) {
+        if (node == null) {
+            return;
+        }
+
+        System.out.println(prefix + (isLeft ? "├──" : "└──") + node.value);
+        printNode(node.left, prefix + (isLeft ? "│   " : "    "), true);
+        printNode(node.right, prefix + (isLeft ? "│   " : "    "), false);
+    }
+
+    // Method to print the entire binary tree
+    public void printTree() {
+        printNode(root, "", false);
+    }
     public static void main(String[] args) {
         CustomBinaryTree tree = new CustomBinaryTree();
         tree.insert(2);
         tree.insert(5);
         tree.insert(1);
         tree.insert(6);
+        tree.insert(4);
+        tree.insert(24);
+        tree.insert(50);
+        tree.insert(3);
 
-        System.out.println(tree.get(5));
-        System.out.println(tree.depthFirstSearch(6));
-
+        tree.printTree();
+        tree.selectionSort();
+        tree.printTree();
     }
 }
