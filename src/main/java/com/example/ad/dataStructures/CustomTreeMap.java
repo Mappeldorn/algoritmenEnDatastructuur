@@ -1,4 +1,4 @@
-package dataStructures;
+package com.example.ad.dataStructures;
 
 /**
  * A custom tree map implementation
