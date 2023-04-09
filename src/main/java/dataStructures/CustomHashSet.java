@@ -113,6 +113,20 @@ public class CustomHashSet<T> {
         return Math.abs(element.hashCode() % table.length);
     }
 
+    /**
+     * Search for an element in the set using linear search
+     * @param element The element to search for
+     * @return True if the element is in the set, false if the element is not in the set
+     */
+    public boolean customLinearSearch(T element) {
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != null && table[i].equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Code to test
     public static void main(String[] arr) {
         CustomHashSet<Integer> chs = new CustomHashSet<>();
@@ -120,5 +134,7 @@ public class CustomHashSet<T> {
         chs.add(3);
         chs.add(0);
         chs.add(5);
+
+        chs.customLinearSearch(3);
     }
 }
