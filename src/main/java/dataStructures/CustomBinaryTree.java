@@ -98,21 +98,26 @@ public class CustomBinaryTree <T extends Comparable<T>> {
     }
 
     public T get(T value) {
-        Node result = getHelper(value, root);
+        Node result = getHelper(root, value);
         return (result != null) ? (T) result.value : null;
     }
 
-    private Node getHelper(T value, Node node) {
+    private Node getHelper(Node node, T value) {
         if (node == null) {
             return null;
         }
-        if (value.compareTo((T) node.value) < 0) {
-            return getHelper(value, node.left);
-        } else if (value.compareTo((T) node.value) > 0) {
-            return getHelper(value, node.right);
-        } else {
+        if (node.value == value) {
             return node;
         }
+        Node leftSearch = getHelper(node.left, value);
+        if (leftSearch != null) {
+            return leftSearch;
+        }
+        Node rightSearch = getHelper(node.right, value);
+        if (rightSearch != null) {
+            return rightSearch;
+        }
+        return null;
     }
 
     public static void main(String[] args) {
@@ -122,6 +127,7 @@ public class CustomBinaryTree <T extends Comparable<T>> {
         tree.insert(1);
         tree.insert(6);
 
+        System.out.println(tree.get(5));
         System.out.println(tree.depthFirstSearch(6));
 
     }
