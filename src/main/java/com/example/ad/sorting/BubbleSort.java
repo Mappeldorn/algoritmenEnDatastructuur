@@ -1,4 +1,4 @@
-package sorting;
+package com.example.ad.sorting;
 
 public class BubbleSort<T extends Comparable<T>> {
     public void bubbleSort(T[] arr) {
