@@ -104,6 +104,20 @@ public class CustomHashSet<T> {
         }
     }
 
+       /**
+     * Search for an element in the set using linear search
+     * @param element The element to search for
+     * @return True if the element is in the set, false if the element is not in the set
+     */
+    public boolean customLinearSearch(T element) {
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != null && table[i].equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * Hash an element
      * @param element The element to hash
@@ -120,5 +134,7 @@ public class CustomHashSet<T> {
         chs.add(3);
         chs.add(0);
         chs.add(5);
+        
+        chs.customLinearSearch(3);
     }
 }
