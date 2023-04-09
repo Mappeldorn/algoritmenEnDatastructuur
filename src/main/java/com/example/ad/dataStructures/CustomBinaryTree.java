@@ -1,4 +1,4 @@
-package dataStructures;
+package com.example.ad.dataStructures;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -170,34 +170,28 @@ public class CustomBinaryTree <T extends Comparable<T>> {
         }
     }
 
-    // Helper method to print a node and its subtree
-    private void printNode(Node<T> node, String prefix, boolean isLeft) {
+
+    public String printTree(){
+        return printNode(this.root, "", false);
+    }
+    public String printNode(Node node, String prefix, boolean isLeft) {
         if (node == null) {
-            return;
+            return "";
         }
-
-        System.out.println(prefix + (isLeft ? "├──" : "└──") + node.value);
-        printNode(node.left, prefix + (isLeft ? "│   " : "    "), true);
-        printNode(node.right, prefix + (isLeft ? "│   " : "    "), false);
+        StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
+        sb.append(isLeft ? "├──" : "└──");
+        sb.append(node.value);
+        sb.append("\n");
+        sb.append(printNode(node.left, prefix + (isLeft ? "│   " : "    "), true));
+        sb.append(printNode(node.right, prefix + (isLeft ? "│   " : "    "), false));
+        return sb.toString();
     }
 
-    // Method to print the entire binary tree
-    public void printTree() {
-        printNode(root, "", false);
-    }
     public static void main(String[] args) {
         CustomBinaryTree tree = new CustomBinaryTree();
-        tree.insert(2);
-        tree.insert(5);
         tree.insert(1);
-        tree.insert(6);
         tree.insert(4);
-        tree.insert(24);
-        tree.insert(50);
-        tree.insert(3);
-
-        tree.printTree();
-        tree.selectionSort();
-        tree.printTree();
+        System.out.println(tree.depthFirstSearch(4));
     }
 }
