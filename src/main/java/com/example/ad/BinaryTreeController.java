@@ -1,6 +1,7 @@
 package com.example.ad;
 
 import com.example.ad.dataStructures.CustomBinaryTree;
+import com.example.ad.sorting.SelectionSort;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -45,7 +46,8 @@ public class BinaryTreeController {
     }
 
     public void sort(){
-        binaryTree.selectionSort();
+        SelectionSort ss = new SelectionSort();
+        binaryTree.rebuild(ss.selectionSort(binaryTree.toList()));
         updateLabel();
     }
 

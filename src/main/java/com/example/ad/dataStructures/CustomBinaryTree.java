@@ -122,26 +122,36 @@ public class CustomBinaryTree <T extends Comparable<T>> {
         return null;
     }
 
+
+    public List<T> toList(){
+        List<T> list = new ArrayList<T>();
+        traverse(root, list);
+        return list;
+    }
     /**
      * Sort binary tree
      */
-    public void selectionSort() {
-        List<T> list = new ArrayList<T>();
-        traverse(root, list);
+//    public void selectionSort() {
+//        List<T> list = new ArrayList<T>();
+//        traverse(root, list);
+//
+//        for (int i = 0; i < list.size() - 1; i++) {
+//            int minIndex = i;
+//            for (int j = i + 1; j < list.size(); j++) {
+//                if (list.get(j).compareTo(list.get(minIndex)) < 0) {
+//                    minIndex = j;
+//                }
+//            }
+//            T temp = list.get(i);
+//            list.set(i, list.get(minIndex));
+//            list.set(minIndex, temp);
+//        }
+//
+//            rebuild(root, list);
+//    }
 
-        for (int i = 0; i < list.size() - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(j).compareTo(list.get(minIndex)) < 0) {
-                    minIndex = j;
-                }
-            }
-            T temp = list.get(i);
-            list.set(i, list.get(minIndex));
-            list.set(minIndex, temp);
-        }
-
-            rebuild(root, list);
+    public void rebuild(List<T> list){
+        rebuildHelper(root, list);
     }
 
     /**
@@ -149,11 +159,11 @@ public class CustomBinaryTree <T extends Comparable<T>> {
      * @param node
      * @param list
      */
-    private void rebuild(Node node, List<T> list) {
+    private void rebuildHelper(Node node, List<T> list) {
         if (node != null) {
-            rebuild(node.left, list);
+            rebuildHelper(node.left, list);
             node.value = list.remove(0);
-            rebuild(node.right, list);
+            rebuildHelper(node.right, list);
         }
     }
 
