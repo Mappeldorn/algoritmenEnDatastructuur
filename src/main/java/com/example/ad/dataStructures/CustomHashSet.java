@@ -1,10 +1,13 @@
 package com.example.ad.dataStructures;
 
+import java.lang.reflect.Array;
+
 /**
  * A custom hash set implementation
  * @param <T> The type of the elements in the set
  */
 public class CustomHashSet<T> {
+    private static final int Min_TABLE_SIZE = 16;
     private Object[] table;
     private int size;
 
@@ -12,7 +15,7 @@ public class CustomHashSet<T> {
      * Create a new set
      */
     public CustomHashSet() {
-        table = new Object[16];
+        table = new Object[Min_TABLE_SIZE];
         size = 0;
     }
 
@@ -25,11 +28,11 @@ public class CustomHashSet<T> {
         if (contains(element)) {
             return false;
         }
+
         // Resize if the table is full
-        if (size >= table.length) {
+        if (size + 1 >= table.length) {
             resize();
         }
-
         int index = hash(element);
 
         // If index is already taken, find the next free index
@@ -94,7 +97,7 @@ public class CustomHashSet<T> {
     private void resize() {
         Object[] oldTable = table;
         table = new Object[oldTable.length * 2];
-        size = 0;
+
 
         // Rehash all elements
         for (Object element : oldTable) {
@@ -130,11 +133,38 @@ public class CustomHashSet<T> {
     // Code to test
     public static void main(String[] arr) {
         CustomHashSet<Integer> chs = new CustomHashSet<>();
-        chs.add(6);
-        chs.add(3);
-        chs.add(0);
+        chs.add(15);
+        chs.add(2);
+        chs.add(1);
         chs.add(5);
-        
-        chs.customLinearSearch(3);
+        chs.add(6);
+        chs.add(7);
+        chs.add(8);
+        chs.add(9);
+        chs.add(11);
+        chs.add(10);
+        chs.add(22);
+        chs.add(30);
+        chs.add(69);
+        chs.add(100);
+        chs.add(155);
+
+        System.out.println(chs.table[0].getClass().getSimpleName());
+    }
+
+
+    public String printHset(){
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int i = 0; i < table.length; i++) {
+            if (i == table.length - 1) {
+                sb.append(table[i]);
+            }else{
+                sb.append(table[i] + ", ");
+            }
+        }
+        sb.append(']');
+
+        return sb.toString();
     }
 }

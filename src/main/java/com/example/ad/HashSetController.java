@@ -2,6 +2,7 @@ package com.example.ad;
 
 import com.example.ad.dataStructures.CustomBinaryTree;
 import com.example.ad.dataStructures.CustomHashSet;
+import com.example.ad.sorting.BubbleSort;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +20,12 @@ public class HashSetController<T> {
     }
 
     public void updateLabel(){
+        clearValuesLabel();
+        values.setText(hashSet.printHset());
+    }
+
+    public void clearValuesLabel(){
+        values.setText("");
     }
 
     public void clearSearchLabel(){
@@ -27,6 +34,15 @@ public class HashSetController<T> {
 
     public void search(){
         clearSearchLabel();
+
+        boolean contains = hashSet.customLinearSearch(newValue.getText());
+
+        if (contains){
+            searchLabel.setText("Binary tree contains: " + newValue.getText());
+        }else{
+            searchLabel.setText("Binary tree does not contains: " + newValue.getText());
+
+        }
     }
 
     public void reset(){
@@ -34,6 +50,7 @@ public class HashSetController<T> {
     }
 
     public void sort(){
+        BubbleSort<Integer> bubbleSort = new BubbleSort<>();
         updateLabel();
     }
 
@@ -45,5 +62,6 @@ public class HashSetController<T> {
         hashSet.add(newValue.getText());
         updateLabel();
         newValue.setText("");
+
     }
 }
