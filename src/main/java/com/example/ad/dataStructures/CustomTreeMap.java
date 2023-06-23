@@ -155,6 +155,33 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         return size;
     }
 
+    public boolean depthFirstSearch(V value){
+        return depthFirstSearchHelper(this.root, value);
+    }
+
+    /**
+     * Checks if value is present in the tree map
+     * @param root Node
+     * @param value V target
+     * @return boolean
+     */
+    private boolean depthFirstSearchHelper(Node root, V value){
+        //Check if root is empty
+        if (root == null) {
+            return false;
+        }
+        //Check if root value the target
+        if (root.value == value) {
+            return true;
+        }
+
+        //Search in the left part of the binary tree
+        boolean leftSearch = depthFirstSearchHelper(root.left, value);
+        //Search in the right part of the binary tree
+        boolean rightSearch = depthFirstSearchHelper(root.right, value);
+        return leftSearch || rightSearch;
+    }
+
     // Code for testing to make sure it works
     public static void main(String[] args) {
         CustomTreeMap<Integer, String> map = new CustomTreeMap<>();
@@ -162,5 +189,7 @@ public class CustomTreeMap<K extends Comparable<K>, V> {
         map.put(3, "three");
         map.put(0, "zero");
         map.put(5, "five");
+
+        System.out.println(map.depthFirstSearch("sixxx"));
     }
 }
