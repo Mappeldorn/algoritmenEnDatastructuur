@@ -1,6 +1,7 @@
 package com.example.ad;
 
 import com.example.ad.dataStructures.CustomBinaryTree;
+import com.example.ad.datasource.Car;
 import com.example.ad.sorting.SelectionSort;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,6 +18,10 @@ public class BinaryTreeController {
 
     public void initialize(){
         binaryTree = new CustomBinaryTree<>();
+        Car audi = new Car("Audi", "rs3", 5, 360);
+        Car mercedes = new Car("Mercedes", "c63 amg", 4,510);
+        Car fiat = new Car("Fiat", "multipla", 4, 103);
+//        binaryTree.insert(audi);
 
     }
 

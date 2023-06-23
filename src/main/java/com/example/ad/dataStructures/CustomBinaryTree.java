@@ -1,5 +1,8 @@
 package com.example.ad.dataStructures;
 
+import com.example.ad.datasource.Car;
+import com.example.ad.sorting.SelectionSort;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -131,24 +134,6 @@ public class CustomBinaryTree <T extends Comparable<T>> {
     /**
      * Sort binary tree
      */
-//    public void selectionSort() {
-//        List<T> list = new ArrayList<T>();
-//        traverse(root, list);
-//
-//        for (int i = 0; i < list.size() - 1; i++) {
-//            int minIndex = i;
-//            for (int j = i + 1; j < list.size(); j++) {
-//                if (list.get(j).compareTo(list.get(minIndex)) < 0) {
-//                    minIndex = j;
-//                }
-//            }
-//            T temp = list.get(i);
-//            list.set(i, list.get(minIndex));
-//            list.set(minIndex, temp);
-//        }
-//
-//            rebuild(root, list);
-//    }
 
     public void rebuild(List<T> list){
         rebuildHelper(root, list);
@@ -200,8 +185,15 @@ public class CustomBinaryTree <T extends Comparable<T>> {
 
     public static void main(String[] args) {
         CustomBinaryTree tree = new CustomBinaryTree();
-        tree.insert(1);
-        tree.insert(4);
+        SelectionSort selectionSort = new SelectionSort();
+        Car audi = new Car("Audi", "rs3", 5, 360);
+        Car mercedes = new Car("Mercedes", "c63 amg", 4,510);
+        Car fiat = new Car("Fiat", "multipla", 4, 103);
+        tree.insert(audi);
+        tree.insert(mercedes);
+        tree.insert(fiat);
+        tree.rebuild(selectionSort.selectionSort(tree.toList()));
+
         System.out.println(tree.depthFirstSearch(4));
     }
 }
